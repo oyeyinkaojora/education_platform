@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load  crispy_forms_tags %}
+
+{% block title %}
+   Edit "{{course.title}} "
+{% endblock title %}
+
+{% block content %}
+  <h1>Edit "{{course.title}} "</h1>
+  <h2>Course modules</h2>
+  <form method="post">
+    {{ formset|crispy }}
+    {{ formset.management_form }}
+    {% csrf_token %}
+    <input class="btn btn-info" type="submit" value="Save modules">
+  </form>
+{% endblock content %}

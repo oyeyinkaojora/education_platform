@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load  crispy_forms_tags %}
+
+{% block title %}
+  Enroll Now
+{% endblock title %}
+
+
+
+{% block content %}
+        <h2>Enroll</h2>
+        <form method="post" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <p ><input class ="btn btn-info" type="submit" value="Save content"></p>
+        </form>
+{% endblock content %}

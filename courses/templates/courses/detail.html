@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+ {{ object.title }}
+{% endblock %}
+
+{% block content %}
+    {% with subject=object.subject %}
+         <h1 class = "bg-light text-dark">
+             {{ object.title }}
+         </h1>
+         <div>
+             <h2 class="display-4">Overview</h2>
+             <p>
+                 <a href="{% url "course_list_subject" subject.slug %}">
+                    {{ subject.title }}
+                 </a>.
+                 {{ object.modules.count }} modules.
+                 Instructor: {{ object.owner.get_full_name }}
+             </p>
+             {{ object.overview|linebreaks }}
+             {% if request.user.is_authenticated %}
+                 <form action=" {% url 'student_enroll_course' %} ">
+                        {% csrf_token %}
+                       {{ enroll_form|crispy }}
+                     <input type="submit" class="btn btn-info" value="Enroll now">
+                 </form>
+             {% else %}
+                 <a class="btn btn-info" href=" {% url 'student_registration' %} ">
+                     Register to Enroll
+                 </a>
+             {% endif %}
+         </div>
+    {% endwith %}
+{% endblock %}

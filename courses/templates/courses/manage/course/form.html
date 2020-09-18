@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load  crispy_forms_tags %}
+
+{% block title %}
+   {% if object %}
+     Edit Course " {{object.title}}"
+   {% else %}
+     Create a new course
+   {% endif %}
+{% endblock title %}
+
+
+
+{% block content %}
+  
+    {% if object %}
+       <h3> Edit Course " {{object.title}}"</h3>
+    {% else %}
+       <h3> Create a new course </h3>
+    {% endif %}
+      <form class="form-group" method="post">
+          {{ form|crispy }}
+          {% csrf_token %}
+          <p ><input class ="btn btn-info" type="submit" value="Save course"></p>
+      </form>
+{% endblock content %}

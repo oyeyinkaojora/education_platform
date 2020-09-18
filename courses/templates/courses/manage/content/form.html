@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load  crispy_forms_tags %}
+
+{% block title %}
+   {% if object %}
+       Edit content " {{object.title}} "
+   {% else %}
+       Add new Content 
+   {% endif %}
+{% endblock title %}
+ 
+
+
+{% block content %}
+    <h1> 
+        {% if object %}
+            Edit content " {{object.title}} "
+        {% else %}
+            Add new Content 
+        {% endif %}
+    </h1>
+
+    <div class="container">
+        <h2>Course Info</h2>
+        <form method="post" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <p ><input class ="btn btn-info" type="submit" value="Save content"></p>
+        </form>
+    </div>
+{% endblock content %}
